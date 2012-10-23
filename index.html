@@ -1,5 +1,6 @@
 <html>
 <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <style type="text/css">
         body {
             font-family: sans-serif;
@@ -9,6 +10,11 @@
         
         h1 {
             font-size: 300%;
+            margin: 50px 0px 50px 0px;
+        }
+        
+        h2 {
+            font-size: 250%;
             margin: 50px 0px 50px 0px;
         }
         
@@ -38,5 +44,57 @@
 </head>
 <body>
     <h1>SrandomSpinner</h1>
+    
+    <p>Like a random spinner, but better.</p>
+    
+    <textarea id="in"></textarea>
+    
+    <div><button id="do">Spin!</button></div>
+    
+    <!-- Result target -->
+    <h2 id="out"/>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Grab the values from the URL
+            var urlValues = getURLValues();
+            
+            // Set the value of the text area.
+            $("#in").val(urlValues);
+            
+            // Spin the spinner (get a random value)!
+            spin();
+        });
+    
+        $("#do").click(function() {
+            spin();
+        });
+        
+        /* Get values from a parameter in the URL. */
+        function getURLValues() {
+            // Get everything after '?values='. If it's malformed, good luck.
+            var urlValues = document.URL.split('?values=')[1];
+            
+            if (urlValues == undefined) {
+                url = '';
+            }
+            
+            return urlValues;
+        }
+        
+        /* Get a random value from the values in the text area. */
+        function spin() {
+            // Get the comma separated values in the text area
+            var rawValues = $("#in").val();
+            
+            // Store the values in an array
+            var values = new Array();
+            values = rawValues.split(',');
+            
+            // Display a random value
+            var randomIndex = Math.floor(Math.random() * values.length);            
+            $("#out").text(values[randomIndex]);
+        }
+    </script>
 </body>
 </html>
