@@ -1,6 +1,8 @@
 <html>
 <head>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://sonicade.com/t/tt/jquery-css-transform.js"></script>
+	<script type="text/javascript" src="http://sonicade.com/t/tt/jquery-animate-css-rotate-scale.js"></script>
     <style type="text/css">
         body {
             font-family: sans-serif;
@@ -28,6 +30,8 @@
             width: 600px;
         	border: 2px solid #cccccc;
         	padding: 5px;
+			position: relative;
+			top: -350px;
         }
         
         button {
@@ -39,6 +43,15 @@
         img {
             border: none;
         }
+		.pie {
+			width: 600px;
+			height: 600px;
+			position: relative;
+			margin: 0 auto;
+			border: 1px solid #ff9900;
+			border-radius: 300px;
+			display: block;
+		}
     </style>
     <title>SrandomSpinner</title>
 </head>
@@ -46,7 +59,7 @@
     <h1>SrandomSpinner</h1>
     
     <p>Like a random spinner, but better.</p>
-    
+    <span class="pie"></span>
     <textarea id="in"></textarea>
     
     <div><button id="do">Spin!</button></div>
@@ -94,6 +107,11 @@
             // Display a random value
             var randomIndex = Math.floor(Math.random() * values.length);            
             $("#out").text(values[randomIndex]);
+			
+			setInterval(
+			    function () {
+			        $('#in').animate({rotate: '+=1deg'}, 0);
+			    }, 200);
         }
     </script>
 </body>
